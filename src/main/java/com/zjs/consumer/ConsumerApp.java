@@ -2,7 +2,7 @@
  * Project Name:ActiveMq
  * File Name:ConsumerApp.java
  * Package Name:com.zjs.consumer
- * Date:2016Äê12ÔÂ23ÈÕÉÏÎç11:42:11
+ * Date:2016å¹´12æœˆ23æ—¥ä¸Šåˆ11:42:11
  * Copyright (c) 2016, 893568029@qq.com All Rights Reserved.
  *
 */
@@ -10,8 +10,8 @@ package com.zjs.consumer;
 /**
  * ClassName: ConsumerApp <br/>
  * Function: TODO ADD FUNCTION. <br/>
- * Reason: TODO ADD REASON(¿ÉÑ¡). <br/>
- * date: 2016Äê12ÔÂ23ÈÕ ÉÏÎç11:42:11 <br/>
+ * Reason: TODO ADD REASON(å¯é€‰). <br/>
+ * date: 2016å¹´12æœˆ23æ—¥ ä¸Šåˆ11:42:11 <br/>
  *
  * @author zhujisong
  * @version 
@@ -25,34 +25,34 @@ import javax.jms.*;
 
 /**
  * Created by outofmemory.cn on 14-8-26.
- * activemqÏû·ÑÕßÊµÀı
+ * activemqæ¶ˆè´¹è€…å®ä¾‹
  */
 public class ConsumerApp implements MessageListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerApp.class);
-    private static final String BROKER_URL = "tcp://112.124.39.129:61616";
+    private static final String BROKER_URL = "tcp://ip:61616";
     private static final String SUBJECT = "zjs";
 
     public static void main(String[] args) throws JMSException {
-        //³õÊ¼»¯ConnectionFactory
+        //åˆå§‹åŒ–ConnectionFactory
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
 
-        //´´½¨mqÁ¬½Ó
+        //åˆ›å»ºmqè¿æ¥
         Connection conn = connectionFactory.createConnection();
-        //Æô¶¯Á¬½Ó
+        //å¯åŠ¨è¿æ¥
         conn.start();
 
-        //´´½¨»á»°
+        //åˆ›å»ºä¼šè¯
         Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-        //Í¨¹ı»á»°´´½¨Ä¿±ê
+        //é€šè¿‡ä¼šè¯åˆ›å»ºç›®æ ‡
         Destination dest = session.createQueue(SUBJECT);
-        //´´½¨mqÏûÏ¢µÄÏû·ÑÕß
+        //åˆ›å»ºmqæ¶ˆæ¯çš„æ¶ˆè´¹è€…
         MessageConsumer consumer = session.createConsumer(dest);
 
-        //³õÊ¼»¯MessageListener
+        //åˆå§‹åŒ–MessageListener
         ConsumerApp me = new ConsumerApp();
 
-        //¸øÏû·ÑÕßÉè¶¨¼àÌı¶ÔÏó
+        //ç»™æ¶ˆè´¹è€…è®¾å®šç›‘å¬å¯¹è±¡
         consumer.setMessageListener(me);
     }
 
