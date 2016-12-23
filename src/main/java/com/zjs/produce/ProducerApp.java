@@ -2,7 +2,7 @@
  * Project Name:ActiveMq
  * File Name:ProducerApp.java
  * Package Name:com.zjs.produce
- * Date:2016Äê12ÔÂ23ÈÕÉÏÎç11:41:00
+ * Date:2016å¹´12æœˆ23æ—¥ä¸Šåˆ11:41:00
  * Copyright (c) 2016, 893568029@qq.com All Rights Reserved.
  *
 */
@@ -10,8 +10,8 @@ package com.zjs.produce;
 /**
  * ClassName: ProducerApp <br/>
  * Function: TODO ADD FUNCTION. <br/>
- * Reason: TODO ADD REASON(¿ÉÑ¡). <br/>
- * date: 2016Äê12ÔÂ23ÈÕ ÉÏÎç11:41:00 <br/>
+ * Reason: TODO ADD REASON(å¯é€‰). <br/>
+ * date: 2016å¹´12æœˆ23æ—¥ ä¸Šåˆ11:41:00 <br/>
  *
  * @author zhujisong
  * @version 
@@ -26,40 +26,40 @@ import javax.jms.*;
 
 /**
  * Created by outofmemory.cn on 14-8-26.
- * activemq Éú²úÕßÊµÀı
+ * activemq ç”Ÿäº§è€…å®ä¾‹
  */
 public class ProducerApp {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProducerApp.class);
-    private static final String BROKER_URL = "tcp://112.124.39.129:61616";
+    private static final String BROKER_URL = "tcp://ip:61616";
     private static final String SUBJECT = "zjs";
 
     public static void main(String[] args) throws JMSException {
-        //³õÊ¼»¯Á¬½Ó¹¤³§
+        //åˆå§‹åŒ–è¿æ¥å·¥å‚
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(BROKER_URL);
-        //»ñµÃÁ¬½Ó
+        //è·å¾—è¿æ¥
         Connection conn = connectionFactory.createConnection();
-        //Æô¶¯Á¬½Ó
+        //å¯åŠ¨è¿æ¥
         conn.start();
 
-        //´´½¨Session£¬´Ë·½·¨µÚÒ»¸ö²ÎÊı±íÊ¾»á»°ÊÇ·ñÔÚÊÂÎñÖĞÖ´ĞĞ£¬µÚ¶ş¸ö²ÎÊıÉè¶¨»á»°µÄÓ¦´ğÄ£Ê½
+        //åˆ›å»ºSessionï¼Œæ­¤æ–¹æ³•ç¬¬ä¸€ä¸ªå‚æ•°è¡¨ç¤ºä¼šè¯æ˜¯å¦åœ¨äº‹åŠ¡ä¸­æ‰§è¡Œï¼Œç¬¬äºŒä¸ªå‚æ•°è®¾å®šä¼šè¯çš„åº”ç­”æ¨¡å¼
         Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-        //´´½¨¶ÓÁĞ
+        //åˆ›å»ºé˜Ÿåˆ—
         Destination dest = session.createQueue(SUBJECT);
-        //createTopic·½·¨ÓÃÀ´´´½¨Topic
+        //createTopicæ–¹æ³•ç”¨æ¥åˆ›å»ºTopic
         //session.createTopic("TOPIC");
 
-        //Í¨¹ısession¿ÉÒÔ´´½¨ÏûÏ¢µÄÉú²úÕß
+        //é€šè¿‡sessionå¯ä»¥åˆ›å»ºæ¶ˆæ¯çš„ç”Ÿäº§è€…
         MessageProducer producer = session.createProducer(dest);
         for (int i=0;i<100;i++) {
-            //³õÊ¼»¯Ò»¸ömqÏûÏ¢
-            TextMessage message = session.createTextMessage("hello active mq ÖĞÎÄ" + i);
-            //·¢ËÍÏûÏ¢
+            //åˆå§‹åŒ–ä¸€ä¸ªmqæ¶ˆæ¯
+            TextMessage message = session.createTextMessage("hello active mq ä¸­æ–‡" + i);
+            //å‘é€æ¶ˆæ¯
             producer.send(message);
             LOGGER.debug("send message {}", i);
         }
 
-        //¹Ø±ÕmqÁ¬½Ó
+        //å…³é—­mqè¿æ¥
         conn.close();
     }
 }
